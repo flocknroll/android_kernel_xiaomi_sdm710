@@ -2904,7 +2904,6 @@ static inline int same_freq_domain(int src_cpu, int dst_cpu)
 	return 1;
 }
 
-static inline void clear_reserved(int cpu) { }
 static inline int alloc_related_thread_groups(void) { return 0; }
 
 #define trace_sched_cpu_load(...)
@@ -2930,10 +2929,18 @@ static inline int cpu_max_power_cost(int cpu)
 
 static inline void clear_walt_request(int cpu) { }
 
+/* `reserved` only use in SCHED_WALT */
 static inline int is_reserved(int cpu)
 {
 	return 0;
 }
+
+static inline int mark_reserved(int cpu)
+{
+	return 0;
+}
+
+static inline void clear_reserved(int cpu) { }
 
 static inline int got_boost_kick(void)
 {
